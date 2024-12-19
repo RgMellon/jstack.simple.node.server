@@ -1,6 +1,7 @@
 const http = require("http");
 const routes = require("./routes");
 const url = require("url");
+const bodyParse = require("./helpers/bodyParse");
 
 const server = http.createServer((request, response) => {
   const parsedUrl = url.parse(request.url, true);
@@ -31,7 +32,13 @@ const server = http.createServer((request, response) => {
       response.end(JSON.stringify(body));
     };
 
-    route.handler(request, response);
+    if (["POST", "PUT"].includes(request.method)) {
+      bodyParse(request, () => {
+        route.handler(request, response);
+      });
+    } else {
+      route.handler(request, response);
+    }
   } else {
     response.writeHead(404, {
       "content-type": "text-html",
