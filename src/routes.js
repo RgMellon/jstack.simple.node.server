@@ -12,4 +12,10 @@ module.exports = [
     endpoint: "/users/:id",
     handler: UsersController.getUserById,
   },
+
+  {
+    method: "POST",
+    endpoint: "/users",
+    handler: UsersController.createUser,
+  },
 ];
