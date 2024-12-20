@@ -64,4 +64,20 @@ module.exports = {
 
     response.send(200, { users });
   },
+
+  remove: (request, response) => {
+    const { id } = request.params;
+
+    const userExist = users.find((user) => user.id == id);
+
+    if (!userExist) {
+      return response.send(404, {
+        error: "User not found",
+      });
+    }
+
+    users = users.filter((user) => user.id !== id);
+
+    response.send(200, { users });
+  },
 };

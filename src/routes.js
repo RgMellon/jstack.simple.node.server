@@ -24,4 +24,10 @@ module.exports = [
     endpoint: "/users/:id",
     handler: UsersController.updateUser,
   },
+
+  {
+    method: "DELETE",
+    endpoint: "/users/:id",
+    handler: UsersController.remove,
+  },
 ];
